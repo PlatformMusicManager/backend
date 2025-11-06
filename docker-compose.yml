@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    build:
+      context: ./database/db
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: musicdb
+    ports:
+      - "5432:5432"
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+  auth:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    environment:
+      REDIS_URL: "redis://redis:6379"
+      DATABASE_URL: "postgresql://admin:admin@db:5432/musicdb"
+      USER_CACHE_TTL: 7200
+      SESSION_CACHE_TTL: 3600
+      VERIFY_TTL: 1800
+      VERIFY_ATTEMPTS: 3
+    ports:
+      - "3000:3000"
