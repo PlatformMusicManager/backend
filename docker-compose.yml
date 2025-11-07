@@ -26,5 +26,7 @@ services:
       SESSION_CACHE_TTL: 3600
       VERIFY_TTL: 1800
       VERIFY_ATTEMPTS: 3
+      EMAIL_USER: david.ter.1889@gmail.com
+      EMAIL_PASSWORD: ntumeooqmmfeyrqe
     ports:
       - "3000:3000"
