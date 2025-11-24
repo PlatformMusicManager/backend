@@ -4,3 +4,6 @@
 [submodule "database"]
 	path = database
 	url = git@github.com:PlatformMusicManager/database-container.git
+[submodule "soundcloud-service"]
+	path = soundcloud-service
+	url = git@github.com:PlatformMusicManager/soundcloud-service

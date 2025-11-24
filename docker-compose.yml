@@ -25,15 +25,48 @@ services:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries:
+        5
+
+        # --- MinIO Service (S3 Compatible Storage) ---
+  minio:
+    image: minio/minio:latest
+    ports:
+      - "9000:9000" # API Port
+      - "9001:9001" # Console Port
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # --- Helper to create the bucket automatically ---
+  # createbuckets:
+  #   image: minio/mc
+  #   depends_on:
+  #     minio:
+  #       condition: service_healthy
+  #   entrypoint: >
+  #     /bin/sh -c "
+  #     /usr/bin/mc alias set myminio http://minio:9000 minioadmin minioadmin;
+  #     /usr/bin/mc mb myminio/music-data;
+  #     /usr/bin/mc anonymous set public myminio/music-data;
+  #     exit 0;
+  #     "
 
   auth:
     build:
       context: ./auth-service
       dockerfile: Dockerfile
     environment:
-      REDIS_URL: "redis://redis:6379"
-      DATABASE_URL: "postgresql://admin:admin@db:5432/musicdb"
+      REDIS_URL: redis://redis:6379
+      DATABASE_URL: postgresql://admin:admin@db:5432/musicdb
       USER_CACHE_TTL: 7200
       SESSION_CACHE_TTL: 3600
       VERIFY_TTL: 1800
@@ -41,6 +74,8 @@ services:
       EMAIL_USER: david.ter.1889@gmail.com
       EMAIL_PASSWORD: ntumeooqmmfeyrqe
       JWT_SECRET: AsdasdasdasDsd123123123
+      ACCESS_TOKEN_TTL: 3600
+      REFRESH_TOKEN_TTL: 2592000
     ports:
       - "3000:3000"
     depends_on:
@@ -48,3 +83,28 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+
+  soundcloud:
+    build:
+      context: ./soundcloud-service
+      dockerfile: Dockerfile
+    environment:
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: AsdasdasdasDsd123123123
+      SOUNDCLOUD_ID: cmgIawgsU6miJDulrCqmIYSIcnJUZeYQ
+      S3_URL: http://minio:9000
+      S3_LOGIN: minioadmin
+      S3_PASS: minioadmin
+      S3_BUCKET_NAME: music-data
+    ports:
+      - "3001:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+
+volumes:
+  minio_data:
