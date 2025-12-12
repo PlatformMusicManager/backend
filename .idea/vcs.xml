@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-service/libs/cache-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-service/libs/database-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-service/libs/domain-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/auth-service/libs/email-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/database" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/soundcloud-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/soundcloud-service/libs/database-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/soundcloud-service/libs/domain-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/soundcloud-service/libs/soundcloud" vcs="Git" />
+  </component>
+</project>
