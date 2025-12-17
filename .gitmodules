@@ -7,3 +7,6 @@
 [submodule "soundcloud-service"]
 	path = soundcloud-service
 	url = git@github.com:PlatformMusicManager/soundcloud-service
+[submodule "library-service"]
+	path = library-service
+	url = git@github.com:PlatformMusicManager/library-service.git
