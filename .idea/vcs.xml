@@ -8,6 +8,11 @@
     <mapping directory="$PROJECT_DIR$/auth-service/libs/domain-lib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/auth-service/libs/email-lib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/database" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/library-service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/library-service/libs/cache-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/library-service/libs/database-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/library-service/libs/domain-lib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/library-service/libs/utils-lib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/soundcloud-service" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/soundcloud-service/libs/cache-lib" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/soundcloud-service/libs/database-lib" vcs="Git" />
